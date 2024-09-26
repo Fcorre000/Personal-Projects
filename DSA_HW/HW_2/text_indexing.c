@@ -55,6 +55,47 @@ int tokenize_buffer(char *buffer, char *words[], int max_words){
     return word_count;
 }
 
+//sorts words
+void insertion_sort(char *words[], int word_count){
+    for(int i = 1; i < word_count; i++){//i=1 because we need to start at the 2nd word
+        char *key = words[i];
+        int j = i - 1;//j used to traverse the sorted portion right to left
+        while(j >= 0 && strcmp(words[j], key) > 0){
+            words[j + 1] = words[j];//shifts j one position to the right
+            j = j - 1;//decreases j to check the previous elements in the sorted portion
+        }
+        words[j + 1] = key;//inserts key into the right place in the sorted portion
+    }
+}
+
+
+int binary_search(char *words[], int word_count, char *target) {
+    int left = 0;
+    int right = word_count - 1;
+    int iterations = 0;
+
+    while (left <= right) {
+        int mid = left + (right - left) / 2;
+        iterations++;
+        printf("Middle index: %d\n", mid);
+
+        int cmp = strcmp(words[mid], target);
+        if (cmp == 0) {
+            printf("Total iterations: %d\n", iterations);
+            printf("Found\n");
+            return mid;
+        } else if (cmp < 0) {
+            left = mid + 1;
+        } else {
+            right = mid - 1;
+        }
+    }
+    printf("Total iterations: %d\n", iterations);
+    printf("Not found\n");
+    return -1;
+}
+
+
 int main(int argc, char** argv) {
     char *fname = NULL;
     int mode = 0; // 0 - normal, 1 - verbose
@@ -73,11 +114,29 @@ int main(int argc, char** argv) {
     //read file to string
     char *file_content = read_file_to_string(fname);
 
-    //error check then tokenize string
+    //MAIN ACTIONS: actually do stuff with the file now
     if(file_content != NULL){
         char *words[MAX_WORDS];
         int word_count = tokenize_buffer(file_content, words, MAX_WORDS);
+
+        //sort words using insertion sort
+        insertion_sort(words, word_count);
+
+        // Example usage of the sorted words
+        for (int i = 0; i < word_count; i++) {
+            printf("Word %d: %s\n", i, words[i]);
+        }
+
+        // Read each word and use binary search to search for it in the sorted list
+        for (int i = 0; i < word_count; i++) {
+            printf("Searching for word: %s\n", words[i]);
+            binary_search(words, word_count, words[i]);
+        }
+
+        free(file_content);
+    
     }
+
     
     return 0;
 }
