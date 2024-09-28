@@ -118,21 +118,49 @@ int main(int argc, char** argv) {
     if(file_content != NULL){
         char *words[MAX_WORDS];
         int word_count = tokenize_buffer(file_content, words, MAX_WORDS);
+        
+        if (mode == 1) {
+            // Print original data
+            printf("-- Original data --\n");
+            printf("i | pointers[i] | word\n");
+            printf("-----|------------------|------------------\n");
+            for (int i = 0; i < word_count; i++) {
+                printf("%d | %p | %s\n", i, (void*)words[i], words[i]);
+            }
+        } else {
+            // Print original data in mode 0 format
+            printf("-- Original data --\n");
+            for (int i = 0; i < word_count; i++) {
+                printf("%d %s\n", i, words[i]);
+            }
+        }
 
-        //sort words using insertion sort
+        // Sort words using insertion sort
         insertion_sort(words, word_count);
 
-        // Example usage of the sorted words
-        for (int i = 0; i < word_count; i++) {
-            printf("Word %d: %s\n", i, words[i]);
+        if (mode == 1) {
+            // Print sorted data
+            printf("-- Clean and sorted data --\n");
+            printf("i | pointers[i] | word\n");
+            printf("-----|------------------|------------------\n");
+            for (int i = 0; i < word_count; i++) {
+                printf("%d | %p | %s\n", i, (void*)words[i], words[i]);
+            }
+        } else {
+            // Print sorted data in mode 0 format
+            printf("-- Clean and sorted data --\n");
+            for (int i = 0; i < word_count; i++) {
+                printf("%d %s\n", i, words[i]);
+            }
         }
 
-        // Read each word and use binary search to search for it in the sorted list
+        // Perform binary search on example words
+        printf("-- Binary search --\n");
         for (int i = 0; i < word_count; i++) {
-            printf("Searching for word: %s\n", words[i]);
+            printf("%s\n", words[i]);
             binary_search(words, word_count, words[i]);
         }
-
+       
         free(file_content);
     
     }
