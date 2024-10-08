@@ -2,12 +2,13 @@
 #include <vector>
 using namespace std;
 
-void countSort(const vector<int>& arr, int k){
+void countSort(vector<int>& arr, int k){
     vector<int> counts(k + 1, 0);//initialize counts array with zeros
     vector<int> sorted_copy(arr.size());
     int j;
     int t;
 
+    
     for(t = 0; t < arr.size(); t++){
         counts[arr[t]]++;//updates counts
     }
