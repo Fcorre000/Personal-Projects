@@ -21,6 +21,7 @@ v1 = sympy.Matrix([2*b + 3*c,
 matrix = v1
 
 #Perform row reduction to find rank aka dimension of the span
+#.rref() stores 2 elements, but we will only use the pivot_columns from here
 rref_matrix, pivot_columns = matrix.T.rref()
 
 #Rank = dimension of the span

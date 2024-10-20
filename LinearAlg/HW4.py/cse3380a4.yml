@@ -1,0 +1,10 @@
+name: cse3380a4
+channels:
+  - defaults
+dependencies:
+  - gensim
+  - nltk
+  - numpy
+  - scipy==1.12
+  - pytest
+  - ipykernel
