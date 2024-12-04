@@ -16,6 +16,11 @@ int main()
     bool mouseWasReleased = false;
     bool AKeyWasReleased = false;
 
+    sf::Texture texture;
+    texture.loadFromFile("/Users/fortnitekorea/Desktop/Personal-Projects/Game/maverick-sprite.jpeg");
+    //setup our sprite with a texture
+    sf::Sprite sprite(texture);
+
     while (window.isOpen())
     {
         //event object created
@@ -73,7 +78,10 @@ int main()
         //will continually clear, draw and display window
         //until program is closed.
         window.clear();
-        window.draw(shape);
+
+        //draw sprites
+        window.draw(sprite);
+        //window.draw(shape);
         window.display();
     }
 
