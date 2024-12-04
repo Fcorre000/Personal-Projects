@@ -13,6 +13,9 @@ int main()
     shape.setOutlineThickness(2);
     shape.setPosition(200, 100);
 
+    bool mouseWasReleased = false;
+    bool AKeyWasReleased = false;
+
     while (window.isOpen())
     {
         //event object created
@@ -43,7 +46,28 @@ int main()
                 
             }
 
+            //code used to make sure mouse detection is only detected on a press AND release
+            //otherwise one mouse click will print out a whole lot of messages
+            if(event.type == sf::Event::MouseButtonReleased){
+                mouseWasReleased = true;
+            }
+
+            if(event.type == sf::Event::KeyReleased){
+                AKeyWasReleased = true;
+            }
+
                             
+        }
+
+        //outside of the event loop
+        if(sf::Mouse::isButtonPressed(sf::Mouse::Button::Left) && mouseWasReleased){
+            cout <<"Left Mouse button Pressed\n";
+            mouseWasReleased = false;
+        }
+
+        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A) && AKeyWasReleased){
+            cout << "The letter A key was pressed";
+            AKeyWasReleased = false;
         }
 
         //will continually clear, draw and display window

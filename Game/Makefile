@@ -2,7 +2,7 @@
 CXX = g++
 
 # Compiler flags
-CXXFLAGS = -I/opt/homebrew/Cellar/sfml/2.6.2/include
+CXXFLAGS = -std=c++17 -I/opt/homebrew/Cellar/sfml/2.6.2/include
 
 # Linker flags
 LDFLAGS = -L/opt/homebrew/Cellar/sfml/2.6.2/lib -lsfml-graphics -lsfml-window -lsfml-system
